@@ -20,11 +20,6 @@ public class CountriesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Country>>> Get()
     {
-        //var CountryList = await _context.Countries
-        //    .Include(x => x.States)!
-        //    .ThenInclude(x => x.Cities)
-        //    .ToListAsync();
-
         var CountryList = await _countryService.GetAsync();
 
         return Ok(CountryList);
@@ -33,11 +28,6 @@ public class CountriesController : ControllerBase
     [HttpGet("GetAll")]
     public async Task<ActionResult<IEnumerable<Country>>> GetAll()
     {
-        //var CountryList = await _context.Countries
-        //    .Include(x => x.States)!
-        //    .ThenInclude(x => x.Cities)
-        //    .ToListAsync();
-
         var CountryList = await _countryService.GetAllAsync();
 
         return Ok(CountryList);
