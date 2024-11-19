@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vent.DataAccess;
 using Vent.Services.Interfaces;
 using Vent.Shared.Entities;
 

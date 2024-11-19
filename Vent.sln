@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vent.Shared", "Vent.Shared\Vent.Shared.csproj", "{03CB9568-5888-4B87-BBF5-729423CA6D39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vent.Shared", "Vent.Shared\Vent.Shared.csproj", "{03CB9568-5888-4B87-BBF5-729423CA6D39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vent.Services", "Vent.Services\Vent.Services.csproj", "{FBC05C4F-EA77-4C5A-AD97-F71BF6D0DE91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vent.Services", "Vent.Services\Vent.Services.csproj", "{FBC05C4F-EA77-4C5A-AD97-F71BF6D0DE91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vent.Repositories", "Vent.Repositories\Vent.Repositories.csproj", "{9037EEBD-054F-4D5A-98BF-00D078A625A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vent.Repositories", "Vent.Repositories\Vent.Repositories.csproj", "{9037EEBD-054F-4D5A-98BF-00D078A625A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vent.DataAccess", "Vent.DataAccess\Vent.DataAccess.csproj", "{F42EB349-04B6-4417-864A-CC92E8429CAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vent.DataAccess", "Vent.DataAccess\Vent.DataAccess.csproj", "{F42EB349-04B6-4417-864A-CC92E8429CAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vent.Backend", "Vent.Backend\Vent.Backend.csproj", "{DC708A61-D5AF-4008-B188-29D130FA7D8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vent.Backend", "Vent.Backend\Vent.Backend.csproj", "{DC708A61-D5AF-4008-B188-29D130FA7D8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vent.Frontend", "Vent.Frontend\Vent.Frontend.csproj", "{78E5D069-2406-44F4-8405-A1C5F1F633C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vent.Frontend", "Vent.Frontend\Vent.Frontend.csproj", "{78E5D069-2406-44F4-8405-A1C5F1F633C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
