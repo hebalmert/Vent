@@ -7,7 +7,7 @@ using Vent.Frontend.Shared;
 using Vent.Shared.Entities;
 using Vent.Shared.Resources;
 
-namespace Vent.Frontend.Pages.PagesCountry;
+namespace Vent.Frontend.Pages.Countries;
 
 public partial class IndexCountries
 {

@@ -19,7 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Conexion a la base de datos
-builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer("name=DefaultConnection"));
+builder.Services.AddDbContext<DataContext>(x =>
+    x.UseSqlServer("name=DefaultConnection", options => options.MigrationsAssembly("Vent.Backend")));
 //Alimentgador de Base de Datos SeedDb
 builder.Services.AddTransient<SeedDb>();
 

@@ -32,7 +32,8 @@ public class SeedDb
             {
                 List<CountryResponse> NlistCountry = (List<CountryResponse>)responseCountries.Result!;
                 List<CountryResponse> countries = NlistCountry.Where(x => x.Name == "Colombia" ||
-                x.Name == "Peru" || x.Name == "Venezuela" || x.Name == "Ecuador" || x.Name == "Chile" || x.Name == "Mexico").ToList();
+                x.Name == "Peru" || x.Name == "Venezuela" || x.Name == "Ecuador" || x.Name == "Chile" || x.Name == "Mexico"
+                || x.Name == "Honduras" || x.Name == "Panama").ToList();
 
                 foreach (CountryResponse item in countries)
                 {

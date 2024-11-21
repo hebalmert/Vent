@@ -15,6 +15,8 @@ public class DataContext : DbContext
 
     public DbSet<City> Cities => Set<City>();
 
+    public DbSet<SoftPlan> SoftPlans => Set<SoftPlan>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -25,6 +27,9 @@ public class DataContext : DbContext
         modelBuilder.Entity<State>().HasIndex(e => new { e.Name, e.CountryId }).IsUnique();
 
         modelBuilder.Entity<City>().HasIndex(e => new { e.StateId, e.Name }).IsUnique();
+
+        modelBuilder.Entity<SoftPlan>().HasIndex(e => e.Name).IsUnique();
+        modelBuilder.Entity<SoftPlan>().Property(e => e.Price).HasPrecision(18, 2);
 
         DisableCascadingDelete(modelBuilder);
     }
