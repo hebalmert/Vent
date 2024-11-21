@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vent.DataAccess;
+using Vent.Repositories.Helpers;
 using Vent.Repositories.Interfaces;
 using Vent.Shared.Entities;
+using Vent.Shared.Pagination;
+using Vent.Shared.Responses;
 
 namespace Vent.Repositories.Implementation
 {
@@ -19,21 +17,24 @@ namespace Vent.Repositories.Implementation
             _context = context;
         }
 
-        public async Task<IEnumerable<Country>> GetAllAsync()
+        public async Task<Response> GetAsync(PaginationDTO pagination)
         {
-            var listCountry = await _context.Countries
-                .Include(x => x.States)
-                .ToListAsync();
+            var queryable = _context.Countries.Include(x => x.States).AsQueryable();
 
-            return listCountry;
-        }
+            if (!string.IsNullOrWhiteSpace(pagination.Filter))
+            {
+                queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+            }
 
-        public async Task<IEnumerable<Country>> GetAsync()
-        {
-            var listCountry = await _context.Countries
-                .ToListAsync();
+            double counting = await queryable.CountAsync();
+            Response result = new()
+            {
+                IsSuccess = true,
+                Result = await queryable.OrderBy(x => x.Name).Paginate(pagination).ToListAsync(),
+                CountItem = counting
+            };
 
-            return listCountry;
+            return result;
         }
     }
 }

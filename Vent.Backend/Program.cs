@@ -28,6 +28,18 @@ builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 
+//Inicio de Area de los Serviciios
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+    {
+        builder.WithOrigins("https://localhost:7136") // dominio de tu aplicación Blazor
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .WithExposedHeaders(new string[] { "Totalpages", "conteo" });
+    });
+});
+
 var app = builder.Build();
 
 //Inyeccion del SeeDB
@@ -46,6 +58,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Llamar el Servicio de CORS
+app.UseCors("AllowSpecificOrigin");
 
 app.UseHttpsRedirection();
 

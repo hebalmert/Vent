@@ -7,4 +7,6 @@ public class Response
     public string? Message { get; set; }
 
     public object? Result { get; set; }
+
+    public double CountItem { get; set; }
 }
