@@ -16,4 +16,10 @@ public class CountryService : ICountryService
     }
 
     public async Task<Response> GetAsync(PaginationDTO pagination) => await _countryRepository.GetAsync(pagination);
+
+    public async Task<Response> GetIdAsync(int Id) => await _countryRepository.GetIdAsync(Id);
+
+    public async Task<Response> PostAsync(Country country) => await _countryRepository.PostAsync(country);
+
+    public async Task<Response> PutAsync(Country country) => await _countryRepository.PutAsync(country);
 }

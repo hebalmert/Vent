@@ -1,3 +1,4 @@
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -16,6 +17,8 @@ await builder.Build().RunAsync();
 
 void ConfigureServices(IServiceCollection services)
 {
+    //Mensajes Sweet tipo Modal
+    services.AddSweetAlert2();
     //Para Agregar Multilenguaje
     services.AddLocalization();
     //Para Implementar MudBlazor

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Vent.Shared.Resources;
 
 namespace Vent.Shared.Entities;
 
@@ -7,9 +8,9 @@ public class Country
     [Key]
     public int CountryId { get; set; }
 
-    [Required(ErrorMessage = "El Campo {0} es Obligatorio")]
-    [MaxLength(100, ErrorMessage = "El campo {0} no puede tener mas de {1} Caracter")]
-    [Display(Name = "Pais")]
+    [Display(Name = "Country", ResourceType = typeof(Resource))]
+    [MaxLength(100, ErrorMessageResourceName = "MaxLength", ErrorMessageResourceType = typeof(Resource))]
+    [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resource))]
     public string Name { get; set; } = null!;
 
     [MaxLength(10, ErrorMessage = "El campo {0} no puede tener mas de {1} Caracter")]

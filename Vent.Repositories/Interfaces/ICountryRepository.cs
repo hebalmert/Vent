@@ -7,4 +7,10 @@ namespace Vent.Repositories.Interfaces;
 public interface ICountryRepository
 {
     Task<Response> GetAsync(PaginationDTO pagination);
+
+    Task<Response> GetIdAsync(int Id);
+
+    Task<Response> PostAsync(Country country);
+
+    Task<Response> PutAsync(Country country);
 }

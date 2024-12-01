@@ -1,5 +1,15 @@
-﻿<h3>CreateCountries</h3>
+﻿@page "/Countries/Create"
 
-@code {
-
+@if (Country is null)
+{
+    <Loading />
 }
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <FormCountry @ref="FormCountry" Country="Country" OnValidSubmit="CreateAsync" ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}
+

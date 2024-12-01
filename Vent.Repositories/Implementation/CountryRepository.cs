@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 using Vent.DataAccess;
 using Vent.Repositories.Helpers;
 using Vent.Repositories.Interfaces;
@@ -35,6 +36,39 @@ namespace Vent.Repositories.Implementation
             };
 
             return result;
+        }
+
+        public async Task<Response> GetIdAsync(int Id)
+        {
+            if (Id != 0)
+            {
+                var resultId = await _context.Countries.FindAsync(Id);
+                return new Response { IsSuccess = true, Result = resultId };
+            }
+            return new Response { IsSuccess = false };
+        }
+
+        public async Task<Response> PostAsync(Country country)
+        {
+            if (country is not null)
+            {
+                _context.Countries.Add(country);
+                await _context.SaveChangesAsync();
+                return new Response { IsSuccess = true, Result = country };
+            }
+
+            return new Response { IsSuccess = false };
+        }
+
+        public async Task<Response> PutAsync(Country country)
+        {
+            if (country is not null)
+            {
+                _context.Countries.Update(country);
+                await _context.SaveChangesAsync();
+                return new Response { IsSuccess = true, Result = country };
+            }
+            return new Response { IsSuccess = false };
         }
     }
 }
