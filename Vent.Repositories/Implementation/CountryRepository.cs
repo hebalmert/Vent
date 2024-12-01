@@ -70,5 +70,36 @@ namespace Vent.Repositories.Implementation
             }
             return new Response { IsSuccess = false };
         }
+
+        public async Task<Response> DeleteAsync(int Id)
+        {
+            try
+            {
+                var resulDelete = await _context.Countries.FindAsync(Id);
+                _context.Countries.Remove(resulDelete!);
+                await _context.SaveChangesAsync();
+                return new Response { IsSuccess = true };
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+
+                if (dbUpdateException.InnerException!.Message.Contains("REFERENCE"))
+                {
+                    return new Response
+                    { IsSuccess = false, Message = "REFERENCE" };
+                }
+                else
+                {
+                    return new Response
+                    { IsSuccess = false, Message = dbUpdateException.InnerException.Message };
+                }
+            }
+            catch (Exception e)
+            {
+                return new Response
+                { IsSuccess = false, Message = e.Message };
+            }
+
+        }
     }
 }

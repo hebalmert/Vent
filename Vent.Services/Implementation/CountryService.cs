@@ -22,4 +22,6 @@ public class CountryService : ICountryService
     public async Task<Response> PostAsync(Country country) => await _countryRepository.PostAsync(country);
 
     public async Task<Response> PutAsync(Country country) => await _countryRepository.PutAsync(country);
+
+    public async Task<Response> DeleteAsync(int Id) => await _countryRepository.DeleteAsync(Id);
 }

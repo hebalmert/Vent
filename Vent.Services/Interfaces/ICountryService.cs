@@ -13,4 +13,6 @@ public interface ICountryService
     Task<Response> PostAsync(Country country);
 
     Task<Response> PutAsync(Country country);
+
+    Task<Response> DeleteAsync(int Id);
 }

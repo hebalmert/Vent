@@ -62,4 +62,19 @@ public class CountriesController : ControllerBase
         }
         return BadRequest("Error en Actualizacion");
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> DeleteAsync(int id)
+    {
+        if (id == 0)
+        {
+            return NotFound();
+        }
+        var responseDelete = await _countryService.DeleteAsync(id);
+        if (responseDelete.IsSuccess)
+        {
+            return Ok();
+        }
+        return BadRequest(responseDelete.Message);
+    }
 }
