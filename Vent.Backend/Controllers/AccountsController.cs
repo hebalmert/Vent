@@ -173,7 +173,7 @@ public class AccountsController : ControllerBase
         var result = await _userHelper.ConfirmEmailAsync(user, token);
         if (!result.Succeeded)
         {
-            return BadRequest(result.Errors.FirstOrDefault());
+            return BadRequest(result.Errors.FirstOrDefault()?.Description);
         }
 
         // 📤 Publicar evento
