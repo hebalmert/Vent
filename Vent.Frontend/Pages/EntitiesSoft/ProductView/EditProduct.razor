@@ -1,0 +1,21 @@
+﻿@page "/products/edit/{Id:int}"
+@attribute [Authorize(Roles = "Admin")]
+
+@if (Product is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+            <div class="container" style="width:300px">
+                <FormProduct @ref="FormProduct"
+                             IsEditControl=true
+                             Product="Product"
+                             OnSubmit="Edit"
+                             ReturnAction="Return" />
+            </div>
+        </DialogContent>
+    </MudDialog>
+}

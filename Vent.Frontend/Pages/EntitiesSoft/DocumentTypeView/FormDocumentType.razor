@@ -1,0 +1,32 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<EditForm EditContext="_editContext" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <MudTextField Label="@GetDisplayName(() => DocumentType.DocumentName)"
+                  @bind-Value="@DocumentType.DocumentName"
+                  For="@(() => DocumentType.DocumentName)"
+                  Class="mb-4" />
+    <MudTextField Label="@GetDisplayName(() => DocumentType.Abreviatura)"
+                  @bind-Value="@DocumentType.Abreviatura"
+                  For="@(() => DocumentType.Abreviatura)"
+                  Class="mb-4" />
+    <MudCheckBox Label="@GetDisplayName(() => DocumentType.Active)"
+                 @bind-Value="@DocumentType.Active"
+                 For="@(() => DocumentType.Active)"
+                 Class="mb-4" />
+    <br />
+    <div class="mb-4" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Surface"
+                   OnClick="ReturnAction">
+            Volver
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Dark"
+                   ButtonType="ButtonType.Submit">
+            Guardar
+        </MudButton>
+    </div>
+</EditForm>

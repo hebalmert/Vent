@@ -1,0 +1,104 @@
+﻿@page "/sells"
+@attribute [Authorize(Roles = "User")]
+
+<MudCardContent>
+    <div class="shadow-lg mb-5">
+        <MudCard Outlined="true">
+            <MudCardContent>
+                <h3>Ventas</h3>
+
+                <div class="col-sm-12">
+                    <div class="row align-items-center">
+                        <!-- Columna para el botón -->
+                        <div class="col-md-3 d-flex justify-content-start">
+                            <MudButton Variant="Variant.Filled"
+                                       EndIcon="@Icons.Material.Filled.AddCircle"
+                                       Color="Color.Dark" style="width:130px"
+                                       OnClick="@(()=> ShowModalAsync())">
+                                Venta
+                            </MudButton>
+                        </div>
+                        <!-- Columna para el filtro -->
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <FilterComponent ApplyFilter="SetFilterValue" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        <GenericList MyList="Sells">
+                            <Body>
+                                <MudSimpleTable Dense="true" Hover="true" Striped="true" Style="overflow-x: auto;">
+                                    <thead>
+                                        <tr>
+                                            <th>Venta</th>
+                                            <th>Fecha</th>
+                                            <th>Cliente Fact</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Sells!)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.NroSell
+                                                </td>
+                                                <td>
+                                                    @item.SellDate.ToString("dd-MM-yyyy")
+                                                </td>
+                                                <td>
+                                                    @item.Client!.FullName
+                                                </td>
+                                                <td>
+                                                    @item.Status.ToString()
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    @if (item.Status == SellType.Pendiente)
+                                                    {
+                                                        <MudFab Size="Size.Small"
+                                                                EndIcon="@Icons.Material.Filled.Edit"
+                                                                Color="Color.Dark"
+                                                                OnClick="@(()=> ShowModalAsync(item.SellId, true))">
+                                                        </MudFab>
+                                                    }
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    <MudFab Size="Size.Small"
+                                                            Href="@($"/sells/details/{item.SellId}")"
+                                                            StartIcon="@Icons.Material.Filled.SpaceDashboard"
+                                                            Color="Color.Dark">
+                                                    </MudFab>
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    @if (item.Status == SellType.Pendiente)
+                                                    {
+                                                        <MudFab Size="Size.Small"
+                                                                EndIcon="@Icons.Material.Filled.Delete"
+                                                                Color="Color.Error"
+                                                                OnClick="@(()=> DeleteAsync(item.SellId))">
+                                                        </MudFab>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </MudSimpleTable>
+                            </Body>
+                        </GenericList>
+                    </div>
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <Pagination CurrentPage="CurrentPage"
+                            SelectedPage="SelectedPage"
+                            TotalPages="TotalPages">
+                </Pagination>
+            </MudCardContent>
+        </MudCard>
+    </div>
+</MudCardContent>

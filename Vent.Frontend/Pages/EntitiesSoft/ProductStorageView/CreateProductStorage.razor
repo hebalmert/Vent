@@ -1,0 +1,21 @@
+﻿@page "/productsStorages/create"
+@attribute [Authorize(Roles = "Admin")]
+
+@if (ProductStorage is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+                <div class="container" style="width:300px">
+                    <FormProductStorage @ref=FormProductStorage
+                                 ProductStorage="ProductStorage"
+                                 IsEditControl=false
+                                 OnSubmit="Create"
+                                 ReturnAction="Return"/>
+                </div>
+        </DialogContent>
+    </MudDialog>
+}

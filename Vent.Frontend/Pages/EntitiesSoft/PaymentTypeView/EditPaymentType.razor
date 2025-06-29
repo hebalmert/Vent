@@ -1,0 +1,20 @@
+﻿@page "/paymentTypes/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (PaymentType is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+            <div class="container" style="width:300px">
+                <FormPaymentType @ref="FormPaymentType"
+                             PaymentType="PaymentType"
+                             OnSubmit="Edit"
+                             ReturnAction="Return" />
+            </div>
+        </DialogContent>
+    </MudDialog>
+}

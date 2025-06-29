@@ -1,0 +1,19 @@
+﻿@page "/clients/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (Client is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormClient @ref=FormClient
+                         IsEditControl="true"
+                         Client="Client"
+                         OnSubmit="Edit"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

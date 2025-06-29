@@ -1,0 +1,71 @@
+﻿﻿<MudNavMenu Color="Color.Surface">
+    <MudNavLink Href="/" Icon="@Icons.Material.Rounded.Home" IconColor="Color.Surface">Inicio</MudNavLink>
+    <MudDivider />
+    <AuthorizeView Roles="Admin">
+        <Authorized>
+            <MudNavGroup Title="Control Sistema" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false">
+                <MudNavLink Href="/softplans" Icon="@Icons.Material.Filled.Checklist" IconColor="Color.Info" >Planes</MudNavLink>
+                <MudNavLink Href="/corporations" Icon="@Icons.Material.Filled.People" IconColor="Color.Info" >Corporacion</MudNavLink>
+                <MudNavLink Href="/managers" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info" >Manager</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <MudNavGroup Title="Configuracion General" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false">
+                <MudNavLink Href="/documentTypes" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Tipo Documento</MudNavLink>
+                <MudNavLink Href="/paymentTypes" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Tipo Pagos</MudNavLink>
+                <MudNavLink Href="/taxes" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Impuestos</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <MudNavGroup Title="Menu Productos" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false">
+                <MudNavLink Href="/productsStorages" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Bodegas</MudNavLink>
+                <MudNavLink Href="/transfers" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Bodega Transferencia</MudNavLink>
+                <MudNavLink Href="/categories" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Categoria Productos</MudNavLink>
+                <MudNavLink Href="/products" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Productos</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <MudNavGroup Title="Menu Compras" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false">
+                <MudNavLink Href="/suppliers" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Proveedores</MudNavLink>
+                <MudNavLink Href="/purchases" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Compras</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <MudNavGroup Title="Menu Ventas" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false">
+                <MudNavLink Href="/clients" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Clientes</MudNavLink>
+                <MudNavLink Href="/sells" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Ventas</MudNavLink>
+                <MudNavLink Href="/storagedispatch" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Despacho</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <MudNavGroup Title="Reportes" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false">
+                <MudNavLink Href="/dateGeneralPurchase" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Compras Por Fecha</MudNavLink>
+                <MudNavLink Href="/dateGeneralSells" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Ventas Por Fecha</MudNavLink>
+                <MudNavLink Href="/dateGeneralPaymentsSells" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info">Ventas Tipo Pago Por Fecha</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <MudNavGroup Title="Seguridad Sistema" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Surface" Expanded="false" >
+                <MudNavLink Href="/usuarios" Icon="@Icons.Material.Filled.Security" IconColor="Color.Info" >Usuarios</MudNavLink>
+            </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+
+    <MudNavLink Href="/about" Icon="@Icons.Material.Filled.Info" >Nosotros</MudNavLink>
+    <MudDivider />
+</MudNavMenu>
+
+
+

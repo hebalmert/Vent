@@ -1,0 +1,65 @@
+﻿<EditForm EditContext="_editContext" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+
+    <MudTextField Label="@GetDisplayName(() => ProductStorage.StorageName)"
+                  @bind-Value="@ProductStorage.StorageName"
+                  For="@(() => ProductStorage.StorageName)"
+                  Class="mb-4" />
+    @if (States is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="State" Class="mb-5"
+                   Label="Estado"
+                   Value="SelectedState"
+                   ValueChanged="StateChanged"
+                   ToStringFunc="@(e=> e==null?null : $"{e.Name}")"
+                   For="@(() => ProductStorage.State)">
+            @foreach (var item in States!)
+            {
+                <MudSelectItem Value="item">@item.Name</MudSelectItem>
+            }
+        </MudSelect>
+    }
+    @if (Cities is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="City" Class="mb-5"
+                   Label="Ciudad"
+                   Value="SelectedCity"
+                   ValueChanged="CitiesChanged"
+                   ToStringFunc="@(e=> e==null?null : $"{e.Name}")"
+                   For="@(() => ProductStorage.City)">
+            @foreach (var item in Cities!)
+            {
+                <MudSelectItem Value="item">@item.Name</MudSelectItem>
+            }
+        </MudSelect>
+    }
+
+    <MudCheckBox Label="@GetDisplayName(() => ProductStorage.Active)"
+                 @bind-Value="@ProductStorage.Active"
+                 For="@(() => ProductStorage.Active)"
+                 Class="mb-4" />
+
+    <br />
+    <div class="mb-4" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Surface"
+                   OnClick="ReturnAction">
+            Volver
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Dark"
+                   ButtonType="ButtonType.Submit">
+            Guardar
+        </MudButton>
+    </div>
+</EditForm>

@@ -1,0 +1,20 @@
+﻿@page "/documentTypes/create"
+@attribute [Authorize(Roles = "User")]
+
+@if (DocumentType is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+                <div class="container" style="width:300px">
+                    <FormDocumentType @ref=FormDocumentType
+                                 DocumentType="DocumentType"
+                                 OnSubmit="Create"
+                                 ReturnAction="Return" />
+                </div>
+        </DialogContent>
+    </MudDialog>
+}

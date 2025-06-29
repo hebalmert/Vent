@@ -1,0 +1,212 @@
+﻿@page "/sells/details/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+<MudCardContent>
+    <div class="shadow-lg mb-5">
+        <MudCard Outlined="true">
+            <MudCardContent>
+                @if (Sell is null)
+                {
+                    <Loading />
+                }
+                else
+                {
+                    <h3>Detalle de Venta</h3>
+
+                    <div class="col-sm-12">
+                        <div class="row align-items-center">
+                            <!-- Columna para el botón -->
+                            <div class="col-md-6 d-flex justify-content-start">
+                                <MudGrid Style="max-width: 100%;">
+                                    <MudItem xs="12">
+                                        <MudPaper Class="p-3">
+                                            <MudSimpleTable>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Cliente:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell!.Client!.FullName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Fecha Fac:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell.SellDate.ToString("dd/MM/yyyy")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Pago:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell.PaymentType!.PaymentName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Bodega:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell.ProductStorage!.StorageName</td>
+                                                </tr>
+                                            </MudSimpleTable>
+                                        </MudPaper>
+                                    </MudItem>
+                                </MudGrid>
+                            </div>
+                            <!-- Columna para el filtro -->
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <MudGrid Style="max-width: 400px;">
+                                    <MudItem xs="12">
+                                        <MudPaper Class="p-3">
+                                            <MudSimpleTable>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Totales Factura:</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Subtotal:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell.SubTotalCompra.ToString("N2")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Impuesto:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell.ImpuestoTotalCompra.ToString("N2")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 1.2rem;"><strong>Total:</strong></td>
+                                                    <td style="font-size: 1.2rem;" class="text-end">@Sell.TotalCompra.ToString("N2")</td>
+                                                </tr>
+                                            </MudSimpleTable>
+                                        </MudPaper>
+                                    </MudItem>
+                                </MudGrid>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row align-items-center">
+                            <!-- Columna para el botón -->
+                            <div class="col-md-9 d-flex justify-content-start">
+                                <div>
+                                    <MudButton Variant="Variant.Filled"
+                                               EndIcon="@Icons.Material.Filled.ArrowBack"
+                                               Color="Color.Surface" style="width:150px"
+                                               Href="@($"/sells")">
+                                        Volver
+                                    </MudButton>
+                                </div>
+                                <div style="padding-left:4px">
+                                    @if (Sell.Status == SellType.Pendiente)
+                                    {
+                                        <MudButton Variant="Variant.Filled"
+                                                   EndIcon="@Icons.Material.Filled.AddBox"
+                                                   Color="Color.Dark" style="width:150px"
+                                                   OnClick="@(()=> ShowModalAsync())">
+                                            Producto
+                                        </MudButton>
+                                    }
+                                </div>
+                                <div style="padding-left:4px">
+                                    @if (Sell.Status == SellType.Pendiente)
+                                    {
+                                        <MudButton Variant="Variant.Filled"
+                                                   EndIcon="@Icons.Material.Filled.AddBox"
+                                                   Color="Color.Success" style="width:150px"
+                                                   OnClick="@(()=> ClosePurchaseAsync(Sell.SellId))">
+                                            Cerrar
+                                        </MudButton>
+                                    }
+                                </div>
+                            </div>
+                            <!-- Columna para el filtro -->
+                            <div class="col-md-3 d-flex justify-content-end">
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                }
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        @if (SellDetails is null)
+                        {
+                            <Loading />
+                        }
+                        else
+                        {
+                            <GenericList MyList="SellDetails">
+                                <Body>
+                                    <MudSimpleTable Dense="true" Hover="true" Striped="true" Style="overflow-x: auto;">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Impuesto</th>
+                                                <th>Unitario</th>
+                                                <th>Cantidad</th>
+                                                <th>SubTotal</th>
+                                                <th>Impuesto</th>
+                                                <th>Total</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in SellDetails!)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.Product!.ProductName
+                                                    </td>
+                                                    <td>
+                                                        @item.RateTax
+                                                    </td>
+                                                    <td>
+                                                        @item.UnitCost.ToString("N2")
+                                                    </td>
+                                                    <td>
+                                                        @item.Quantity
+                                                    </td>
+                                                    <td>
+                                                        @item.SubTotal.ToString("N2")
+                                                    </td>
+                                                    <td>
+                                                        @item.Impuesto.ToString("N2")
+                                                    </td>
+                                                    <td>
+                                                        @item.TotalGeneral.ToString("N2")
+                                                    </td>
+                                                    <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                        @if (Sell!.Status == SellType.Pendiente)
+                                                        {
+                                                            <MudFab Size="Size.Small"
+                                                                    EndIcon="@Icons.Material.Filled.Edit"
+                                                                    Color="Color.Dark"
+                                                                    OnClick="@(()=> ShowModalAsync(item.SellDetailsId, true))">
+                                                            </MudFab>
+                                                        }
+                                                    </td>
+                                                    <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                        @if (Sell.Status == SellType.Pendiente)
+                                                        {
+                                                            <MudFab Size="Size.Small"
+                                                                    EndIcon="@Icons.Material.Filled.Delete"
+                                                                    Color="Color.Error"
+                                                                    OnClick="@(()=> DeleteAsync(item.SellDetailsId))">
+                                                            </MudFab>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </MudSimpleTable>
+                                </Body>
+                            </GenericList>
+                        }
+
+                    </div>
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                @if (SellDetails is null)
+                {
+                    <Loading />
+                }
+                else
+                {
+                    <Pagination CurrentPage="CurrentPage"
+                                SelectedPage="SelectedPage"
+                                TotalPages="TotalPages">
+                    </Pagination>
+                }
+            </MudCardContent>
+        </MudCard>
+    </div>
+</MudCardContent>

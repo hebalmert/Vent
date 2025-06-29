@@ -1,0 +1,22 @@
+﻿@page "/paymentTypes/create"
+@attribute [Authorize(Roles = "User")]
+
+@if (PaymentType is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+                <div class="container" style="width:300px">
+                    <FormPaymentType @ref=FormPaymentType
+                                 PaymentType="PaymentType"
+                                 OnSubmit="Create"
+                                 ReturnAction="Return" />
+                </div>
+        </DialogContent>
+    </MudDialog>
+}
+
+

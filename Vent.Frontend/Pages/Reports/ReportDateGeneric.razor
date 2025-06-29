@@ -1,0 +1,40 @@
+﻿<EditForm Model="RepDateDTO" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="4">
+            <MudDatePicker Label="Inicio" Class="mb-4"
+                           Date="@RepDateDTO.DateInicio"
+                           DateChanged="DateInicioChanged"
+                           MinDate="DateMin"
+                           StartMonth="DateMin"
+                           ShowToolbar="false"
+                           DateFormat="dd.MM.yyyy" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudDatePicker Label="Fin" Class="mb-4"
+                           Date="@RepDateDTO.DateFin"
+                           DateChanged="DateFinalChanged"
+                           MinDate="DateMin"
+                           StartMonth="DateMin"
+                           ShowToolbar="false"
+                           DateFormat="dd.MM.yyyy" />
+        </MudItem>
+        <MudItem xs="4">
+            <div class="mb-4" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.ArrowBack"
+                           Color="Color.Surface"
+                           OnClick="ReturnAction">
+                    Volver
+                </MudButton>
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Print"
+                           Color="Color.Dark"
+                           ButtonType="ButtonType.Submit">
+                    Reporte
+                </MudButton>
+            </div>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+

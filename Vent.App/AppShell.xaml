@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Vent.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Vent.App.ViewModels"
+        x:DataType="vm:AppShellViewModel"
+    xmlns:local="clr-namespace:Vent.App.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Vent.App">
+
+    <!-- Definir contenido personalizado en el encabezado del menú (FlyoutHeader) -->
+    <Shell.FlyoutHeader>
+        <StackLayout Padding="10">
+            <!-- Foto de usuario (puedes cargarla desde almacenamiento, o poner una imagen por defecto) -->
+            <Image Source="user_default.png" WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" />
+            <Label Text="Nombre del Usuario" HorizontalOptions="Center" FontSize="18" />
+            <Label Text="Correo del Usuario" HorizontalOptions="Center" FontSize="14" />
+            <Button Text="Cerrar sesión" Command="{Binding LogoutCommand}" HorizontalOptions="Center" />
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <!-- FlyoutItem para HomePage (la página principal que estará en el menú) -->
+    <FlyoutItem Title="Inicio" Icon="home.png">
+        <ShellContent Title="Inicio" ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Datos" Icon="data.png">
+        <ShellContent Title="Datos" ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
+    </FlyoutItem>
+</Shell>

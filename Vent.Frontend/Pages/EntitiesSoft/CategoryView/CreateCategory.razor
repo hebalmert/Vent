@@ -1,0 +1,19 @@
+﻿@page "/categories/create"
+@attribute [Authorize(Roles = "User")]
+
+@if (Category is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormCategory @ref=FormCategory
+                         IsEditControl="false"
+                         Category="Category"
+                         OnSubmit="Create"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

@@ -1,0 +1,19 @@
+﻿@page "/purchases/editPurchasesDetails/{Id:int}"
+@attribute [Authorize(Roles = "Admin")]
+
+@if (PurchaseDetail is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormPurchaseDetails @ref=FormPurchaseDetails
+                               IsEditControl="true"
+                               PurchaseDetail="PurchaseDetail"
+                               OnSubmit="Edit"
+                               ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

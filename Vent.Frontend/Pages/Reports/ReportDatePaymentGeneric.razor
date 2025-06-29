@@ -1,0 +1,58 @@
+﻿<EditForm Model="RepDatePaymentDTO" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid Spacing="3">
+        <MudItem xs="12" sm="6" md="3">
+            <MudDatePicker Label="Inicio" Class="mb-4"
+                           Date="@RepDatePaymentDTO.DateInicio"
+                           DateChanged="DateInicioChanged"
+                           MinDate="DateMin"
+                           StartMonth="DateMin"
+                           ShowToolbar="false"
+                           DateFormat="dd.MM.yyyy" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudDatePicker Label="Fin" Class="mb-4"
+                           Date="@RepDatePaymentDTO.DateFin"
+                           DateChanged="DateFinalChanged"
+                           MinDate="DateMin"
+                           StartMonth="DateMin"
+                           ShowToolbar="false"
+                           DateFormat="dd.MM.yyyy" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            @if (PaymentTypes is null)
+            {
+                <Loading />
+            }
+            else
+            {
+                <MudSelect T="PaymentType" Class="mb-4"
+                           Label="Tipo Pago"
+                           Value="SelectedPaymentType"
+                           ValueChanged="PaymentTypesChanged"
+                           ToStringFunc="@(e=> e==null?null : $"{e.PaymentName}")">
+                    @foreach (var item in PaymentTypes!)
+                    {
+                        <MudSelectItem Value="item">@item.PaymentName</MudSelectItem>
+                    }
+                </MudSelect>
+            }
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <div class="mb-4 d-flex justify-content-center gap-2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.ArrowBack"
+                           Color="Color.Surface"
+                           OnClick="ReturnAction">
+                    Volver
+                </MudButton>
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Print"
+                           Color="Color.Dark"
+                           ButtonType="ButtonType.Submit">
+                    Reporte
+                </MudButton>
+            </div>
+        </MudItem>
+    </MudGrid>
+</EditForm>

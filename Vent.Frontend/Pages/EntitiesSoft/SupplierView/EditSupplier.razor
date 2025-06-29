@@ -1,0 +1,19 @@
+﻿@page "/suppliers/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (Supplier is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormSupplier @ref=FormSupplier
+                         IsEditControl="true"
+                         Supplier="Supplier"
+                         OnSubmit="Edit"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

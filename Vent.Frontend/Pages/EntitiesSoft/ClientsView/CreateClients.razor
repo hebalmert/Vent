@@ -1,0 +1,19 @@
+﻿@page "/clients/create"
+@attribute [Authorize(Roles = "User")]
+
+@if (Client is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormClient @ref=FormClient
+                         IsEditControl="false"
+                         Client="Client"
+                         OnSubmit="Create"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

@@ -1,0 +1,89 @@
+﻿@page "/products/detailProductPhotos/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+<MudCardContent>
+        <div class="shadow-lg mb-5">
+            <MudCard Outlined="true">
+                <MudCardContent>
+                    <h3>Preducto Fotos</h3>
+                    <MudGrid>
+                        <MudItem xs="12" md="3">
+                            <div class="d-flex justify-content-start">
+                                <!-- Columna para los botones -->
+                                <div>
+                                    <MudPaper>
+                                        <MudButton Variant="Variant.Filled"
+                                                   EndIcon="@Icons.Material.Filled.ArrowBack"
+                                                   Color="Color.Surface"
+                                                   style="width:150px"
+                                                   Href="@($"/products")">
+                                            Volver
+                                        </MudButton>
+                                    </MudPaper>
+                                </div>
+                                <div style="padding-left:4px">
+                                    <MudPaper>
+                                        <MudButton Variant="Variant.Filled"
+                                                   EndIcon="@Icons.Material.Filled.AddCircle"
+                                                   Color="Color.Dark"
+                                                   style="width:130px"
+                                                   OnClick="@(()=> ShowModalAsync())">
+                                            Fotos
+                                        </MudButton>
+                                    </MudPaper>
+                                </div>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12" md="9">
+                            <!-- Columna para el filtro -->
+                            <div class="d-flex justify-content-end w-100">
+                                <FilterComponent ApplyFilter="SetFilterValue" />
+                            </div>
+                        </MudItem>
+                    </MudGrid>
+
+                    <br />
+                    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <GenericList MyList="ProductImages">
+                                <Body>
+                                     <MudSimpleTable Dense="true" Hover="true" Striped="true" Style="overflow-x: auto;">
+                                        <thead>
+                                            <tr>
+                                                <th>Foto</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ProductImages!)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <MudImage Src="@item.ImageFullPath" Width="90" Height="60" />
+                                                    </td>
+                                                    <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                        <MudFab Size="Size.Small"
+                                                                EndIcon="@Icons.Material.Filled.Delete"
+                                                                Color="Color.Error"
+                                                                OnClick="@(()=> DeleteAsync(item.ProductImageId))">
+                                                        </MudFab>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </MudSimpleTable>
+                                </Body>
+                            </GenericList>
+                        </div>
+                    </div>
+                    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                    <Pagination CurrentPage="CurrentPage"
+                                SelectedPage="SelectedPage"
+                                TotalPages="TotalPages">
+                    </Pagination>
+
+                </MudCardContent>
+            </MudCard>
+        </div>
+</MudCardContent>

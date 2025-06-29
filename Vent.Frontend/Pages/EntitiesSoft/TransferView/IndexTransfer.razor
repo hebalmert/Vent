@@ -1,0 +1,110 @@
+﻿@page "/transfers"
+@attribute [Authorize(Roles = "User")]
+
+<MudCardContent>
+    <div class="shadow-lg mb-5">
+        <MudCard Outlined="true">
+            <MudCardContent>
+                <h3>Transferencia Inventarios</h3>
+
+                <div class="col-sm-12">
+                    <div class="row align-items-center">
+                        <!-- Columna para el botón -->
+                        <div class="col-md-3 d-flex justify-content-start">
+                            <MudButton Variant="Variant.Filled"
+                                       EndIcon="@Icons.Material.Filled.AddCircle"
+                                       Color="Color.Dark" style="width:130px"
+                                       OnClick="@(()=> ShowModalAsync())">
+                                Transferencia
+                            </MudButton>
+                        </div>
+                        <!-- Columna para el filtro -->
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <FilterComponent ApplyFilter="SetFilterValue" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        <GenericList MyList="Transfers">
+                            <Body>
+                                <MudSimpleTable Dense="true" Hover="true" Striped="true" Style="overflow-x: auto;">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Transferencia</th>
+                                            <th>Desde</th>
+                                            <th>Hacia</th>
+                                            <th>Estatus</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Transfers!)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.DateTransfer
+                                                </td>
+                                                <td>
+                                                    @item.NroTransfer
+                                                </td>
+                                                <td>
+                                                    @item.FromStorageName
+                                                </td>
+                                                <td>
+                                                    @item.ToStorageName
+                                                </td>
+                                                <td>
+                                                    @item.Status.ToString()
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    @if (item.Status == TransferType.Pendiente)
+                                                    {
+                                                        <MudFab Size="Size.Small"
+                                                                EndIcon="@Icons.Material.Filled.Edit"
+                                                                Color="Color.Dark"
+                                                                OnClick="@(()=> ShowModalAsync(item.TransferId, true))">
+                                                        </MudFab>
+                                                    }
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    <MudFab Size="Size.Small"
+                                                            Href="@($"/transfers/details/{item.TransferId}")"
+                                                            StartIcon="@Icons.Material.Filled.SpaceDashboard"
+                                                            Color="Color.Dark">
+                                                    </MudFab>
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    @if (item.Status == TransferType.Pendiente)
+                                                    {
+                                                        <MudFab Size="Size.Small"
+                                                                EndIcon="@Icons.Material.Filled.Delete"
+                                                                Color="Color.Error"
+                                                                OnClick="@(()=> DeleteAsync(item.TransferId))">
+                                                        </MudFab>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </MudSimpleTable>
+                            </Body>
+                        </GenericList>
+                    </div>
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <Pagination CurrentPage="CurrentPage"
+                            SelectedPage="SelectedPage"
+                            TotalPages="TotalPages">
+                </Pagination>
+            </MudCardContent>
+        </MudCard>
+    </div>
+</MudCardContent>
+
+

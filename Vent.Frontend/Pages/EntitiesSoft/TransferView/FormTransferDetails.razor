@@ -1,0 +1,66 @@
+﻿<EditForm EditContext="_editContext" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+
+    @if (Categories is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="Category" Class="mb-5"
+                   Label="Categoria"
+                   Value="SelectedCategory"
+                   ValueChanged="CategoryChanged"
+                   ToStringFunc="@(e=> e==null?null : $"{e.CategoryName}")">
+            @foreach (var item in Categories!)
+            {
+                <MudSelectItem Value="item">@item.CategoryName</MudSelectItem>
+            }
+        </MudSelect>
+    }
+    @if (Products is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="Product" Class="mb-5"
+                   Label="Producto"
+                   Value="SelectedProduct"
+                   ValueChanged="ProductsChanged"
+                   ToStringFunc="@(e=> e==null?null : $"{e.ProductName}")"
+                   For="@(() => TransferDetails.Product)">
+            @foreach (var item in Products!)
+            {
+                <MudSelectItem Value="item">@item.ProductName</MudSelectItem>
+            }
+        </MudSelect>
+    }
+
+    <MudNumericField Label="Disponible"
+                     @bind-Value="@StockAvaible"
+                     Class="mb-4" ReadOnly="true" />
+
+    <MudNumericField T="decimal"
+                     Label="Cantidad Tranferir"
+                     Value="@TransferDetails.Quantity"
+                     ValueChanged="@((valor) => CalculoTotalCant(valor))"
+                     Class="mb-4" />
+
+    <br />
+    <div class="mb-4" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Surface"
+                   OnClick="ReturnAction">
+            Volver
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Dark"
+                   ButtonType="ButtonType.Submit">
+            Guardar
+        </MudButton>
+    </div>
+</EditForm>
+

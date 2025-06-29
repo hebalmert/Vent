@@ -1,0 +1,19 @@
+﻿@page "/categories/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (Category is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormCategory @ref=FormCategory
+                         IsEditControl="true"
+                         Category="Category"
+                         OnSubmit="Edit"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

@@ -1,0 +1,93 @@
+﻿@page "/dateGeneralSells"
+@attribute [Authorize(Roles = "User")]
+
+<MudCardContent>
+    <div class="shadow-lg mb-5">
+        <MudCard Outlined="true">
+            <MudCardContent>
+                <h3>Reporte Ventas Generales por Fecha</h3>
+                <br />
+                <div class="col-sm-12">
+                    <div class="row align-items-center">
+                        <!-- Columna para el botón -->
+                        <div class="col-md-12 d-flex justify-content-start">
+                            <ReportDateGeneric RepDateDTO="RepDateDTO" OnSubmit="Create" ReturnAction="Return"/>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        <GenericList MyList="Sells">
+                            <Body>
+                                <MudSimpleTable Dense="true" Hover="true" Striped="true" Style="overflow-x: auto;">
+                                    <thead>
+                                        <tr>
+                                            <th>Cliente</th>
+                                            <th>Venta</th>
+                                            <th>Fecha</th>
+                                            <th>SubTotal</th>
+                                            <th>Impuesto</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Sells!)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.Client!.FullName
+                                                </td>
+                                                <td>
+                                                    @item.NroSell
+                                                </td>
+                                                <td>
+                                                    @item.SellDate.ToString("dd-MM-yyyy")
+                                                </td>
+                                                <td>
+                                                    @item.SubTotalCompra.ToString("N2")
+                                                </td>
+                                                <td>
+                                                    @item.ImpuestoTotalCompra.ToString("N2")
+                                                </td>
+                                                <td>
+                                                    @item.TotalCompra.ToString("N2")
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    <MudFab Size="Size.Small"
+                                                            Href="@($"/sells/details/{item.SellId}")"
+                                                            StartIcon="@Icons.Material.Filled.SpaceDashboard"
+                                                            Color="Color.Dark">
+                                                    </MudFab>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <br />
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Item:@Sells.Count()</td>
+                                            <td>
+                                                @Sells.Sum(s => s.SubTotalCompra).ToString("N2")
+                                            </td>
+                                            <td>
+                                                @Sells.Sum(s => s.ImpuestoTotalCompra).ToString("N2")
+                                            </td>
+                                            <td>
+                                                @Sells.Sum(s => s.TotalCompra).ToString("N2")
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </MudSimpleTable>
+                            </Body>
+                        </GenericList>
+                    </div>
+                </div>
+
+            </MudCardContent>
+        </MudCard>
+    </div>
+</MudCardContent>

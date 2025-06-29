@@ -1,0 +1,19 @@
+﻿@page "/suppliers/create"
+@attribute [Authorize(Roles = "User")]
+
+@if (Supplier is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormSupplier @ref=FormSupplier
+                         IsEditControl="false"
+                         Supplier="Supplier"
+                         OnSubmit="Create"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

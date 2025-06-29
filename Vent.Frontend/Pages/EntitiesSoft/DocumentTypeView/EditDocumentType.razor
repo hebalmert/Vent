@@ -1,0 +1,21 @@
+﻿@page "/documentTypes/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (DocumentType is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+            <div class="container" style="width:300px">
+                <FormDocumentType @ref="FormDocumentType"
+                             DocumentType="DocumentType"
+                             OnSubmit="Edit"
+                             ReturnAction="Return" />
+            </div>
+        </DialogContent>
+    </MudDialog>
+}
+

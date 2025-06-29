@@ -1,0 +1,93 @@
+﻿@page "/dateGeneralPurchase"
+@attribute [Authorize(Roles = "User")]
+
+<MudCardContent>
+    <div class="shadow-lg mb-5">
+        <MudCard Outlined="true">
+            <MudCardContent>
+                <h3>Reporte Compras Generales por Fecha</h3>
+                <br />
+                <div class="col-sm-12">
+                    <div class="row align-items-center">
+                        <!-- Columna para el botón -->
+                        <div class="col-md-12 d-flex justify-content-start">
+                            <ReportDateGeneric RepDateDTO="RepDateDTO" OnSubmit="Create" ReturnAction="Return" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        <GenericList MyList="Purchases">
+                            <Body>
+                                <MudSimpleTable Dense="true" Hover="true" Striped="true" Style="overflow-x: auto;">
+                                    <thead>
+                                        <tr>
+                                            <th>Proveedor</th>
+                                            <th>Factura</th>
+                                            <th>Fecha Fact</th>
+                                            <th>SubTotal</th>
+                                            <th>Impuesto</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Purchases!)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.Supplier!.Name
+                                                </td>
+                                                <td>
+                                                    @item.NroFactura
+                                                </td>
+                                                <td>
+                                                    @item.FacuraDate.ToString("dd.MM.yyyy")
+                                                </td>
+                                                <td>
+                                                    @item.SubTotalCompra.ToString("N2")
+                                                </td>
+                                                <td>
+                                                    @item.ImpuestoTotalCompra.ToString("N2")
+                                                </td>
+                                                <td>
+                                                    @item.TotalCompra.ToString("N2")
+                                                </td>
+                                                <td style="width:1px; padding-left:1px; padding-right:4px;">
+                                                    <MudFab Size="Size.Small"
+                                                            Href="@($"/purchases/details/{item.PurchaseId}")"
+                                                            StartIcon="@Icons.Material.Filled.SpaceDashboard"
+                                                            Color="Color.Dark">
+                                                    </MudFab>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <br/>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Item:@Purchases.Count()</td>
+                                            <td>
+                                                @Purchases.Sum(s=> s.SubTotalCompra).ToString("N2")
+                                            </td>
+                                            <td>
+                                                @Purchases.Sum(s=> s.ImpuestoTotalCompra).ToString("N2")
+                                            </td>
+                                            <td>
+                                                @Purchases.Sum(s=> s.TotalCompra).ToString("N2")
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </MudSimpleTable>
+                            </Body>
+                        </GenericList>
+                    </div>
+                </div>
+
+            </MudCardContent>
+        </MudCard>
+    </div>
+</MudCardContent>

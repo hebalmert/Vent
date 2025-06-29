@@ -1,0 +1,21 @@
+﻿@page "/purchases/create"
+@attribute [Authorize(Roles = "Admin")]
+
+@if (Purchase is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+                <div class="container" style="width:300px">
+                    <FormPurchase @ref=FormPurchase
+                                 Purchase="Purchase"
+                                 IsEditControl=false
+                                 OnSubmit="Create"
+                                 ReturnAction="Return"/>
+                </div>
+        </DialogContent>
+    </MudDialog>
+}

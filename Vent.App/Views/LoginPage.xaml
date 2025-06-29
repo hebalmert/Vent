@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Vent.App.Views.LoginPage"
+             xmlns:vm="clr-namespace:Vent.App.ViewModels"
+             x:DataType="vm:LoginViewModel"
+             Title="LoginPage">
+
+    <VerticalStackLayout Padding="30" Spacing="15">
+        <Label Text="Usuario" />
+        <Entry Text="{Binding LoginDTO.Email}" Placeholder="Usuario" />
+
+        <Label Text="Contraseña" />
+        <Entry Text="{Binding LoginDTO.Password}" Placeholder="Contraseña" IsPassword="True" />
+
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" />
+
+        <Button Text="Iniciar sesión" Command="{Binding LoginCommand}" />
+
+        <!-- Spinner (ActivityIndicator) -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Blue" />
+        
+    </VerticalStackLayout>
+</ContentPage>

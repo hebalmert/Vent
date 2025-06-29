@@ -416,3 +416,12 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+# Secrets
+Vent.Backend/appsettings.Development.json
+Vent.Backend/appsettings.json
+
+# Secrets
+Vent.Notifications/appsettings.json
+Vent.Notifications/appsettings.Development.json

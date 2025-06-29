@@ -1,0 +1,21 @@
+﻿@page "/purchases/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (Purchase is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+            <div class="container" style="width:300px">
+                <FormPurchase @ref="FormPurchase"
+                             IsEditControl=true
+                             Purchase="Purchase"
+                             OnSubmit="Edit"
+                             ReturnAction="Return" />
+            </div>
+        </DialogContent>
+    </MudDialog>
+}

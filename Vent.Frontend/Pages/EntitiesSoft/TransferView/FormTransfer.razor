@@ -1,0 +1,84 @@
+﻿<EditForm EditContext="_editContext" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+
+    <MudDatePicker Label="Registro" Class="mb-4"
+                   Date="@Transfer.DateTransfer"
+                   DateChanged="DateTransferChanged"
+                   MinDate="DateMin"
+                   StartMonth="DateStart"
+                   ShowToolbar="false"
+                   DateFormat="dd.MM.yyyy" ReadOnly="true" />
+
+
+    @if (Usuarios is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="Usuario" Class="mb-5"
+                   Label="Vendedor"
+                   Value="SelectedUsuario"
+                   ValueChanged="UsuarioChanged"
+                   ToStringFunc="@(e=> e==null ? null : $"{e.FullName}")"
+                   For="@(() => Transfer.Usuario)">
+            @foreach (var item in Usuarios!)
+            {
+                <MudSelectItem Value="item">@item.FullName</MudSelectItem>
+            }
+        </MudSelect>
+    }
+
+
+    @if (ProductStorages1 is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="ProductStorage" Class="mb-5"
+                   Label="Desde Bodega"
+                   Value="SelectedProductStorage1"
+                   ValueChanged="ProductStorageChanged1"
+                   ToStringFunc="@(e=> e==null?null : $"{e.StorageName}")">
+            @foreach (var item in ProductStorages1!)
+            {
+                <MudSelectItem Value="item">@item.StorageName</MudSelectItem>
+            }
+        </MudSelect>
+    }
+
+    @if (ProductStorages2 is null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudSelect T="ProductStorage" Class="mb-5"
+                   Label="Hacia Bodega"
+                   Value="SelectedProductStorage2"
+                   ValueChanged="ProductStorageChanged2"
+                   ToStringFunc="@(e=> e==null?null : $"{e.StorageName}")">
+            @foreach (var item in ProductStorages2!)
+            {
+                <MudSelectItem Value="item">@item.StorageName</MudSelectItem>
+            }
+        </MudSelect>
+    }
+
+    <br />
+    <div class="mb-4" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Surface"
+                   OnClick="ReturnAction">
+            Volver
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Dark"
+                   ButtonType="ButtonType.Submit">
+            Guardar
+        </MudButton>
+    </div>
+</EditForm>

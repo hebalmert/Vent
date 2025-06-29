@@ -1,0 +1,20 @@
+﻿@page "/taxes/edit/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (Tax is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+            <div class="container" style="width:300px">
+                <FormTaxes @ref="FormTaxes"
+                             Tax="Tax"
+                             OnSubmit="Edit"
+                             ReturnAction="Return" />
+            </div>
+        </DialogContent>
+    </MudDialog>
+}

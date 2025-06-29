@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f35ecf10-82a7-4e6f-b821-7bd7cc9d2ebe</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0-rc" />
+    <PackageReference Include="MassTransit" Version="8.5.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\ImgCorporation\" />
+    <Folder Include="wwwroot\Images\ImgManager\" />
+    <Folder Include="wwwroot\Images\ImgUsuarios\" />
+    <Folder Include="wwwroot\Images\ImgCategory\" />
+    <Folder Include="wwwroot\Images\ImgProducts\" />
+    <Folder Include="wwwroot\Images\ImgSuppliers\" />
+    <Folder Include="wwwroot\Images\ImgClients\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vent.AccessData\Vent.AccessData.csproj" />
+    <ProjectReference Include="..\Vent.Contracts\Vent.Contracts.csproj" />
+    <ProjectReference Include="..\Vent.Helpers\Vent.Helpers.csproj" />
+  </ItemGroup>
+
+</Project>

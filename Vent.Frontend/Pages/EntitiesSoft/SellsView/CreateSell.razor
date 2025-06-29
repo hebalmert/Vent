@@ -1,0 +1,21 @@
+﻿@page "/sells/create"
+@attribute [Authorize(Roles = "Admin")]
+
+@if (Sell is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+                <div class="container" style="width:300px">
+                    <FormSell @ref=FormSell
+                                 Sell="Sell"
+                                 IsEditControl=false
+                                 OnSubmit="Create"
+                                 ReturnAction="Return"/>
+                </div>
+        </DialogContent>
+    </MudDialog>
+}

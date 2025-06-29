@@ -1,0 +1,96 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<EditForm EditContext="_editContext" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+
+    <MudGrid>
+        <MudItem xs="6">
+            <MudTextField Label="@GetDisplayName(() => Supplier.Name)"
+                          @bind-Value="@Supplier.Name"
+                          For="@(() => Supplier.Name)"
+                          Class="mb-4" />
+            <MudTextField Label="@GetDisplayName(() => Supplier.NroDocument)"
+                          @bind-Value="@Supplier.NroDocument"
+                          For="@(() => Supplier.NroDocument)"
+                          Class="mb-4" />
+            <MudTextField Label="@GetDisplayName(() => Supplier.Phone)"
+                          @bind-Value="@Supplier.Phone"
+                          For="@(() => Supplier.Phone)"
+                          Class="mb-4" />
+            <MudTextField Label="@GetDisplayName(() => Supplier.Email)"
+                          @bind-Value="@Supplier.Email"
+                          For="@(() => Supplier.Email)"
+                          Class="mb-4" />
+            <MudTextField Label="@GetDisplayName(() => Supplier.ContactName)"
+                          @bind-Value="@Supplier.ContactName"
+                          For="@(() => Supplier.ContactName)"
+                          Class="mb-4" />
+            <MudCheckBox Label="@GetDisplayName(() => Supplier.Active)"
+                         @bind-Value="@Supplier.Active"
+                         Class="mb-4" />
+
+        </MudItem>
+        <MudItem xs="6">
+            <MudTextField Label="@GetDisplayName(() => Supplier.Address)"
+                          @bind-Value="@Supplier.Address"
+                          For="@(() => Supplier.Address)"
+                          Class="mb-4" />
+            @if (States is null)
+            {
+                <Loading />
+            }
+            else
+            {
+                <MudSelect T="State" Class="mb-5"
+                           Label="Estado"
+                           Value="SelectedState"
+                           ValueChanged="StateChanged"
+                           ToStringFunc="@(e=> e==null?null : $"{e.Name}")"
+                           For="@(() => Supplier.State)">
+                    @foreach (var item in States!)
+                    {
+                        <MudSelectItem Value="item">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            }
+            @if (Cities is null)
+            {
+                <Loading />
+            }
+            else
+            {
+                <MudSelect T="City" Class="mb-5"
+                           Label="Ciudad"
+                           Value="SelectedCity"
+                           ValueChanged="CitiesChanged"
+                           ToStringFunc="@(e=> e==null?null : $"{e.Name}")"
+                           For="@(() => Supplier.City)">
+                    @foreach (var item in Cities!)
+                    {
+                        <MudSelectItem Value="item">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            }
+
+            <InputImage ImageSelected="ImageSelected" ImageUrl="@ImageUrl" />
+
+        </MudItem>
+    </MudGrid>
+
+
+    <br />
+    <div class="mb-4" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.ArrowBack"
+                   Color="Color.Surface"
+                   OnClick="ReturnAction">
+            Volver
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Dark"
+                   ButtonType="ButtonType.Submit">
+            Guardar
+        </MudButton>
+    </div>
+</EditForm>

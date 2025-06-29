@@ -1,0 +1,19 @@
+﻿@page "/sells/editSellsDetails/{Id:int}"
+@attribute [Authorize(Roles = "Admin")]
+
+@if (SellDetails is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormSellDetails @ref=FormSellDetails
+                               IsEditControl="true"
+                               SellDetails="SellDetails"
+                               OnSubmit="Edit"
+                               ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

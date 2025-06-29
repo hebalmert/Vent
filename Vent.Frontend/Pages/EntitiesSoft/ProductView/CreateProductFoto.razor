@@ -1,0 +1,19 @@
+﻿@page "/products/CreateProductFoto/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (ProductImage is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog MaxWidth="MaxWidth.large" FullWidth="true">
+        <DialogContent>
+            <FormProductoFoto @ref=FormProductoFoto
+                         IsEditControl="false"
+                         ProductImage="ProductImage"
+                         OnSubmit="Create"
+                         ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

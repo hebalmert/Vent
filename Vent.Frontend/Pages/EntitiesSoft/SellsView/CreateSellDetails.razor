@@ -1,0 +1,21 @@
+﻿@page "/sells/createSellsDatails/{Id:int}"
+@attribute [Authorize(Roles = "User")]
+
+@if (SellDetails is null)
+{
+    <Loading />
+}
+else
+{
+    ﻿<MudDialog>
+        <DialogContent>
+            <div class="container" style="width:300px">
+                <FormSellDetails @ref=FormSellDetails
+                              SellDetails="SellDetails"
+                              IsEditControl=false
+                              OnSubmit="Create"
+                              ReturnAction="Return" />
+            </div>
+        </DialogContent>
+    </MudDialog>
+}
